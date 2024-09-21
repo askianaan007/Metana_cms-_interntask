@@ -13,7 +13,7 @@ import { TbWorld } from "react-icons/tb";
 
 
 
-const AddField = ({ setFields,setField, fields }) => {
+const AddField = ({ setFields,setField, fields ,onDataChange,setCurrent}) => {
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -35,9 +35,22 @@ const AddField = ({ setFields,setField, fields }) => {
 
   function addNewEmailField(){
     setField("email")
-    // setFields([...fields, { name: "Email" }]);
-
+    onDataChange((prevData) => {
+      // Create the new object
+      const newItem = {
+        id: prevData.length+1, // Fixed typo
+        title: "Welcome to our form",
+        description: "This is a description of the form",
+        buttonText: "Start",
+        image: null,
+        type: "email",
+      };
     
+      setCurrent(newItem);
+    
+      return [...prevData, newItem];
+    });
+        
   }
 
   return (

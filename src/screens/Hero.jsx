@@ -5,26 +5,42 @@ import Sidebar from "../components/Sidebar";
 const Hero = () => {
   const [field, setField] = useState("main");
   const [component, setComponent] = useState("Content");
-  const [formData, setFormData] = useState({
+  const [current, setCurrent] = useState({
+    id: 1,
     title: "Welcome to our form",
     description: "This is a description of the form",
     buttonText: "Start",
-    image:null,
+    image: null,
+    type: "Welcome screen",
   });
+  const [formData, setFormData] = useState([
+    {
+      id: 1,
+      title: "Welcome to our form",
+      description: "This is a description of the form",
+      buttonText: "Start",
+      image: null,
+      type: "Welcome screen",
+    },
+  ]);
 
   return (
     <div className="flex h-full">
       <Sidebar
+      current={current}
+        setCurrent={setCurrent}
         field={field}
         setField={setField}
         component={component}
         setComponent={setComponent}
         onDataChange={setFormData}
-        {...formData} 
+        formdata={formData}
       />
-
-      <Content  onDataChange={setFormData} {...formData} 
-      field={field}/>
+      {formData.map((item, index) => {
+        return item.id == current.id ? (
+          <Content onDataChange={setFormData} formdata={item} field={field} />
+        ) : null;
+      })}
     </div>
   );
 };

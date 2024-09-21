@@ -3,32 +3,54 @@ import { MdUpload } from "react-icons/md";
 import { IoIosSettings } from "react-icons/io";
 import { IoIosClose } from "react-icons/io";
 
-const WelcomeBar = ({   title, description, buttonText,onDataChange, setField, field }) => {
-
+const WelcomeBar = ({
+  item,
+  id,
+  title,
+  description,
+  buttonText,
+  onDataChange,
+  setField,
+  field,
+}) => {
   const fileInputRef = useRef(null);
 
   const handleTitleChange = (e) => {
-
-    onDataChange({ title: e.target.value, description, buttonText });
+    onDataChange((prevData) =>
+      prevData.map((item) =>
+        item.id === id ? { ...item, title: e.target.value } : item
+      )
+    );
   };
 
   const handleDescriptionChange = (e) => {
-
-    onDataChange({ title, description: e.target.value, buttonText });
+    onDataChange((prevData) =>
+      prevData.map((item) =>
+        item.id === id ? { ...item, description: e.target.value } : item
+      )
+    );
   };
 
   const handleButtonTextChange = (e) => {
-    onDataChange({ title, description, buttonText: e.target.value });
+    onDataChange((prevData) =>
+      prevData.map((item) =>
+        item.id === id ? { ...item, buttonText: e.target.value } : item
+      )
+    );
   };
 
   const handleFileChange = (event) => {
-    console.log("hhhhhhh")
+    console.log("hhhhhhh");
     const selectedFile = event?.target?.files[0];
     if (selectedFile) {
-      console.log(selectedFile)
+      console.log(selectedFile);
       const imageUrl = URL.createObjectURL(selectedFile);
 
-      onDataChange({ title, description, buttonText, image:imageUrl});
+      onDataChange((prevData) =>
+        prevData.map((item) =>
+          item.id === id ? { ...item, image: imageUrl } : item
+        )
+      );
     }
   };
 
@@ -61,7 +83,7 @@ const WelcomeBar = ({   title, description, buttonText,onDataChange, setField, f
             htmlFor="title-input"
             className="block text-sm font-medium text-gray-700 mb-1"
           >
-            {field == "email" ? "Email" : "Title"}
+            {item.type == "email" ? "Email" : "Title"}
           </label>
           <input
             id="title-input"
@@ -85,7 +107,7 @@ const WelcomeBar = ({   title, description, buttonText,onDataChange, setField, f
             className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm"
           />
         </div>
-        {field == "email" ? null : (
+        {item.type == "email" ? null : (
           <div>
             <label
               htmlFor="button-input"
@@ -103,24 +125,23 @@ const WelcomeBar = ({   title, description, buttonText,onDataChange, setField, f
           </div>
         )}
       </div>
-      {field == "email" ? null : (
+      {item.type == "email" ? null : (
         <>
-           <button
-         type="button"
-         className="mt-5 flex items-center text-sm font-normal gap-2 p-1 font-medium border border-gray-300 rounded-md focus:border-black focus:outline-none hover:border-black"
-         onClick={handleButtonClick}
-       >
-         <MdUpload className="ml-0.5" />
-         Upload
-       </button>
-       <input
-         type="file"
-         ref={fileInputRef}
-         onChange={handleFileChange}
-         style={{ display: "none" }} // This hides the file input
-       />
+          <button
+            type="button"
+            className="mt-5 flex items-center text-sm font-normal gap-2 p-1 font-medium border border-gray-300 rounded-md focus:border-black focus:outline-none hover:border-black"
+            onClick={handleButtonClick}
+          >
+            <MdUpload className="ml-0.5" />
+            Upload
+          </button>
+          <input
+            type="file"
+            ref={fileInputRef}
+            onChange={handleFileChange}
+            style={{ display: "none" }} // This hides the file input
+          />
         </>
-      
       )}
 
       <button className="mt-5 w-full bg-black text-white py-2 rounded-md text-sm">

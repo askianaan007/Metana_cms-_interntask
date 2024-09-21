@@ -5,12 +5,14 @@ import FieldSelection from "./sideBar/FieldSelection";
 import WelcomeBar from "./sideBar/WelcomeBar";
 
 const Sidebar = ({
+  current,
   component,
+  setCurrent,
   setComponent,
   onDataChange,
   field,
   setField,
-  title, description, buttonText,
+  formdata,
 }) => {
   return (
     <div className="h-screen w-[20rem] relative pt-4 px-5 flex flex-col">
@@ -21,18 +23,27 @@ const Sidebar = ({
             options={["Content", "Design", "Share", "Replies"]}
             onChange={(value) => setComponent(value)}
           />
-          <FieldSelection component={component} setField={setField} />
+          <FieldSelection formdata={formdata} setCurrent={setCurrent}  onDataChange={onDataChange} component={component} setField={setField} />
         </>
       ) : (
-        <WelcomeBar
-      title={title}
-      description={description}
-      buttonText={buttonText}
-          onDataChange={onDataChange}
-          setField={setField}
-          field={field}
-        />
-      )}
+        formdata.map((item, index) => {
+          // Use parentheses to wrap the entire return value of the map function
+          return item.id === current.id ? (
+            <WelcomeBar
+            item={item}
+              key={item.id}  // Don't forget to add a unique key for each item in a list
+              id={item.id}
+              title={item.title}
+              description={item.description}
+              buttonText={item.buttonText}
+              onDataChange={onDataChange}
+              setField={setField}
+              field={field}
+            />
+          ) : null;  // Return null if the condition is not met
+        })
+        )
+      }
     </div>
   );
 };

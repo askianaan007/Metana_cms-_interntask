@@ -1,24 +1,29 @@
 import React from "react";
 import { asserts } from "../assets/assets";
 
-const Content = ({
-  title,
-  description,
-  buttonText,
-  field,
-  image,
-  onDataChange,
-}) => {
+const Content = ({ formdata, field, image, onDataChange }) => {
   const handleTitleChange = (e) => {
-    onDataChange({ title: e.target.value, description, buttonText });
+    onDataChange((prevData) =>
+      prevData.map((item) =>
+        item.id === formdata.id ? { ...item, title: e.target.value } : item
+      )
+    );
   };
 
   const handleDescriptionChange = (e) => {
-    onDataChange({ title, description: e.target.value, buttonText });
+    onDataChange((prevData) =>
+      prevData.map((item) =>
+        item.id === id ? { ...item, description: e.target.value } : item
+      )
+    );
   };
 
   const handleButtonTextChange = (e) => {
-    onDataChange({ title, description, buttonText: e.target.value });
+    onDataChange((prevData) =>
+      prevData.map((item) =>
+        item.id === id ? { ...item, buttonText: e.target.value } : item
+      )
+    );
   };
 
   return (
@@ -32,24 +37,24 @@ const Content = ({
               className={`${
                 field == "email" ? "text-3xl" : "text-4xl font-semibold"
               } text-white bg-black leading-tight`}
-              value={title}
+              value={formdata.title}
             />
 
             <input
               onChange={handleDescriptionChange}
               type="text"
               className="mt-6 text-2xl text-white font-light bg-black"
-              value={description}
+              value={formdata.description}
             />
-            {field !== "email" ? (
+            {formdata.type !== "email" ? (
               <div className="flex justify-start mt-6">
                 <button className="bg-white text-black rounded-2xl px-2 py-2 transition-all duration-300 ease-in-out hover:border hover:border-[#4096ff]">
                   <input
                     onChange={handleButtonTextChange}
                     type="text"
-                    value={buttonText}
+                    value={formdata.buttonText}
                     className="px-2 py-1 rounded-md"
-                    style={{ width: `${buttonText.length + 1}ch` }}
+                    style={{ width: `${formdata.buttonText.length + 1}ch` }}
                   />
                 </button>
               </div>
@@ -57,7 +62,7 @@ const Content = ({
               <></>
             )}
           </div>
-          {field !== "email" ? (
+          {formdata.type  !== "email" ? (
             <div className="flex flex-col w-full justify-center p-4">
               <img
                 src={image ? image : asserts.image}

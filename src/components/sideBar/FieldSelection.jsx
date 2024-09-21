@@ -4,10 +4,10 @@ import { Divider } from "antd";
 import SubmitBtn from "../buttons/SubmitBtn";
 import DeleteBtn from "../buttons/DeleteBtn";
 import FieldButtons from "../buttons/FieldButtons";
-import AddField from "../modals/AddField";
+import AddField from "../modals/addField";
 
 
-const FieldSelection = ({ component, setField }) => {
+const FieldSelection = ({ formdata,component, setField ,onDataChange,setCurrent}) => {
   const [fields, setFields] = useState([]);
 
   useEffect(() => {
@@ -30,14 +30,16 @@ const FieldSelection = ({ component, setField }) => {
               The steps users will take to complete the form
             </p>
             <div className="flex flex-col w-full gap-2 overflow-y-auto">
-              {fields.map((item, index) => {
-                return <FieldButtons text={item.name} setField={setField} />;
+              {formdata.map((item, index) => {
+                return <FieldButtons  setField={setField} text={item.type} item={item} setCurrent={setCurrent} />;
               })}
 
               <AddField
+              onDataChange={onDataChange}
                 setField={setField}
                 fields={fields}
                 setFields={setFields}
+                setCurrent={setCurrent}
               />
               <Divider />
               <FieldButtons text={"End screen"} setField={setField} />

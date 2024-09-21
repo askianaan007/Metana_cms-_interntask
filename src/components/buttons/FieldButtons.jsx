@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { FaStopCircle } from "react-icons/fa";
 
-const FieldButtons = ({ text, setField }) => {
+const FieldButtons = ({  setField,text, setCurrent,item }) => {
   return (
     <button
-      onClick={() => setField(text)}
+      onClick={() => {setCurrent(item)
+        setField("email")
+        console.warn("jjj")
+      }}
       className="relative flex items-center w-full pl-1 transition duration-150  rounded-lg cursor-pointer hover:bg-zinc-100 bg-zinc-50"
     >
       <div className="absolute w-2 h-8 transform -translate-y-1/2 bg-black rounded-r-full -left-6 top-1/2"></div>

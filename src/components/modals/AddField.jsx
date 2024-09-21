@@ -11,14 +11,9 @@ import { MdOutlineContactPage } from "react-icons/md";
 import { IoMdPaper } from "react-icons/io";
 import { TbWorld } from "react-icons/tb";
 
-interface AppProps {
-  setFields: (field: any) => void; 
-  fields: any; 
-  setField: (field: any) => void; 
 
-}
 
-const App: React.FC<AppProps> = ({ setFields,setField, fields }) => {
+const App = ({ setFields,setField, fields }) => {
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
 

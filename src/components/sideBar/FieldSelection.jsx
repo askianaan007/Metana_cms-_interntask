@@ -3,19 +3,19 @@ import { icons } from "../../assets/assets";
 import { Divider } from "antd";
 import SubmitBtn from "../buttons/SubmitBtn";
 import DeleteBtn from "../buttons/DeleteBtn";
-import AddField from "../modals/addField";
+import AddField from "../modals/addField.tsx";
 import FieldButtons from "../buttons/FieldButtons";
 
 const FieldSelection = ({ component, setField }) => {
   const [fields, setFields] = useState([]);
 
-  useEffect(()=>{
+  useEffect(() => {
     setFields([
       {
         name: "Welcome screen",
       },
-    ])
-  },[])
+    ]);
+  }, []);
   return (
     <>
       {component === "Content" ? (
@@ -33,7 +33,11 @@ const FieldSelection = ({ component, setField }) => {
                 return <FieldButtons text={item.name} setField={setField} />;
               })}
 
-              <AddField setField={setField} fields={fields} setFields={setFields}  />
+              <AddField
+                setField={setField}
+                fields={fields}
+                setFields={setFields}
+              />
               <Divider />
               <FieldButtons text={"End screen"} setField={setField} />
             </div>

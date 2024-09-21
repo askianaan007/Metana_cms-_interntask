@@ -3,7 +3,7 @@ import { icons } from "../../assets/assets";
 import { Divider } from "antd";
 import SubmitBtn from "../buttons/SubmitBtn";
 import DeleteBtn from "../buttons/DeleteBtn";
-import AddField from "../modals/addField.tsx";
+import AddField from "../modals/addField.jsx";
 import FieldButtons from "../buttons/FieldButtons";
 
 const FieldSelection = ({ component, setField }) => {

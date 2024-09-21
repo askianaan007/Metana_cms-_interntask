@@ -13,7 +13,7 @@ import { TbWorld } from "react-icons/tb";
 
 
 
-const App = ({ setFields,setField, fields }) => {
+const AddField = ({ setFields,setField, fields }) => {
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -138,4 +138,4 @@ const App = ({ setFields,setField, fields }) => {
   );
 };
 
-export default App;
+export default AddField;

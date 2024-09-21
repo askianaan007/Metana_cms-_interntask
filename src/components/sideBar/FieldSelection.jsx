@@ -3,8 +3,8 @@ import { icons } from "../../assets/assets";
 import { Divider } from "antd";
 import SubmitBtn from "../buttons/SubmitBtn";
 import DeleteBtn from "../buttons/DeleteBtn";
-import AddField from "../modals/addField.jsx";
 import FieldButtons from "../buttons/FieldButtons";
+import AddField from "../modals/addField";
 
 const FieldSelection = ({ component, setField }) => {
   const [fields, setFields] = useState([]);

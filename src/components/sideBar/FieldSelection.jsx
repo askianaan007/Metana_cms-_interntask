@@ -4,7 +4,8 @@ import { Divider } from "antd";
 import SubmitBtn from "../buttons/SubmitBtn";
 import DeleteBtn from "../buttons/DeleteBtn";
 import FieldButtons from "../buttons/FieldButtons";
-import AddField from "../modals/addField";
+import AddField from "../modals/AddField";
+
 
 const FieldSelection = ({ component, setField }) => {
   const [fields, setFields] = useState([]);
